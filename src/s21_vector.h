@@ -200,6 +200,42 @@ other.data_ = nullptr;
   other.capacity_ = 0;
 other.size_ = 0;
 }
+
+template<typename T>
+vector<T>::vector& operator=(const vector& other){
+  if(this != &other){
+    delite[] data_;
+    data_ = new T [other.capacity_];
+    size_ = other.size_;
+    capacity_ = other.capacity_;
+    for(auto i = 0;i<size_;i++){
+      data_[i] = other.data_[i];
+  }
+  return *this;
+}
+}//присвоение копированием
+
+
+
+template<typename T>
+vector<T>& vector<T>:: operator=(vector&& other)noexcept{
+if(this !=&other){
+for(auto i = 0;i<size_;i++){
+  data_[i].~T();
+}
+::operator delite(data_);
+data_ = new T(other.capacity_);
+size_ = other.size_;
+capacity_ = other.capacity_;
+for(auto i = 0;i<size_;i++){
+    data_[i] = other.data_[i];
+  }
+other.data_ = nullptr;
+  other.capacity_ = 0;
+other.size_ = 0;
+}
+return *this;
+}// присвоение перемещением
 }  // namespace s21
 
 #endif  // S21_VECTOR_H_
